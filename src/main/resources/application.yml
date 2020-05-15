@@ -1,0 +1,15 @@
+logging:
+  level:
+    org.hibernate.sql: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    com.air.api: TRACE
+    org.springframework: DEBUG
+
+server:
+  port: 8001
+
+api:
+  datasource:
+    url: jdbc:mysql://localhost:3306/flight?useSSL=false&autoReconnect=true&autoReconnectForPools=true&useUnicode=true&characterEncoding=UTF-8&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: flight
+    password: qwer!2345
