@@ -6,12 +6,14 @@ buildscript {
     }
     repositories {
         jcenter()
+        maven { url 'https://palantir.bintray.com/releases/' }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
         classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
         classpath("org.jetbrains.kotlin:kotlin-noarg:${kotlinVersion}")
+        classpath("com.palantir.configurationresolver:gradle-configuration-resolver-plugin:0.3.0")
     }
 }
 
@@ -22,6 +24,7 @@ apply plugin: 'kotlin-allopen'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'com.palantir.configuration-resolver'
 
 group = 'com.air'
 sourceCompatibility = 11

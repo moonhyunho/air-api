@@ -2,6 +2,9 @@ package com.air.api.interfaces.controller
 
 import com.air.api.application.AirlineService
 import com.air.api.domain.Airline
+import com.air.api.interfaces.request.AirlineCreateRequest
+import com.air.api.interfaces.request.AirlineModifyRequest
+import com.air.api.interfaces.response.AirlineView
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -27,24 +30,22 @@ class AirlineController(
     }
 
     @PostMapping
-    fun save(airline: Airline): ResponseEntity<Airline> {
+    fun create(request: AirlineCreateRequest): ResponseEntity<AirlineView> {
         return ResponseEntity(
-            airlineService.save(airline),
+            AirlineView.of(airlineService.create(Airline.of(request))),
             HttpStatus.CREATED
         )
     }
 
     @PutMapping
-    fun update(airline: Airline): ResponseEntity<Airline> {
-        return ResponseEntity(
-            airlineService.update(airline),
-            HttpStatus.ACCEPTED
-        )
+    fun modify(request: AirlineModifyRequest): ResponseEntity<HttpStatus> {
+        airlineService.modify(request.id, request.code, request.name)
+        return ResponseEntity.accepted().build()
     }
 
     @DeleteMapping("/{id}")
     fun delete(@PathVariable id: Long): ResponseEntity<HttpStatus> {
-        airlineService.delete(airlineService.getById(id))
+        airlineService.delete(airlineService.getAirline(id))
         return ResponseEntity.noContent().build()
     }
 

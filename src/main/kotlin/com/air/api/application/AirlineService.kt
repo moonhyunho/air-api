@@ -14,7 +14,7 @@ class AirlineService(
         return airlineRepository.findAll()
     }
 
-    fun getById(id: Long): Airline {
+    fun getAirline(id: Long): Airline {
         return airlineRepository.findByIdOrNull(id) ?: throw Exception()
     }
 
@@ -22,12 +22,12 @@ class AirlineService(
         return airlineRepository.findByCode(code)
     }
 
-    fun save(airline: Airline): Airline {
+    fun create(airline: Airline): Airline {
         return airlineRepository.save(airline)
     }
 
-    fun update(airline: Airline): Airline {
-        return airlineRepository.save(airline)
+    fun modify(id: Long, code: String?, name: String?) {
+        return getAirline(id).modify(code, name)
     }
 
     fun delete(airline: Airline) {
