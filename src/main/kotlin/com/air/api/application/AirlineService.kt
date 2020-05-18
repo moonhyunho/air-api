@@ -4,6 +4,7 @@ import com.air.api.domain.Airline
 import com.air.api.domain.repository.AirlineRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class AirlineService(
@@ -22,14 +23,17 @@ class AirlineService(
         return airlineRepository.findByCode(code)
     }
 
+    @Transactional
     fun create(airline: Airline): Airline {
         return airlineRepository.save(airline)
     }
 
+    @Transactional
     fun modify(id: Long, code: String?, name: String?) {
         return getAirline(id).modify(code, name)
     }
 
+    @Transactional
     fun delete(airline: Airline) {
         airlineRepository.delete(airline)
     }
