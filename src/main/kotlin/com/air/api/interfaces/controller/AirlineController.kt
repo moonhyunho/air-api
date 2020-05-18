@@ -38,6 +38,18 @@ class AirlineController(
         )
     }
 
+    @PostMapping("/create-all")
+    fun createAll(@RequestBody requests: List<AirlineCreateRequest>): ResponseEntity<List<AirlineView>> {
+        return ResponseEntity(
+            airlineService.createAll(requests.map {
+                Airline.of(it)
+            }).map {
+                AirlineView.of(it)
+            },
+            HttpStatus.CREATED
+        )
+    }
+
     @PutMapping
     fun modify(request: AirlineModifyRequest): ResponseEntity<HttpStatus> {
         airlineService.modify(request.id, request.code, request.name)

@@ -29,6 +29,11 @@ class AirlineService(
     }
 
     @Transactional
+    fun createAll(airlines: List<Airline>): List<Airline> {
+        return airlineRepository.saveAll(airlines)
+    }
+
+    @Transactional
     fun modify(id: Long, code: String?, name: String?) {
         return getAirline(id).modify(code, name)
     }
