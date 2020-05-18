@@ -10,7 +10,3 @@ data class AirlineModifyRequest(
     val code: String?,
     val name: String?
 )
-
-data class AirlineCreateAllRequest(
-    val airlines: List<AirlineCreateRequest>
-)
