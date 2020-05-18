@@ -31,6 +31,7 @@ class AirlineController(
 
     @PostMapping
     fun create(request: AirlineCreateRequest): ResponseEntity<AirlineView> {
+        request.validate()
         return ResponseEntity(
             AirlineView.of(airlineService.create(Airline.of(request))),
             HttpStatus.CREATED
