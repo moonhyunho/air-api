@@ -2,6 +2,8 @@ package com.air.api.application
 
 import com.air.api.domain.Airline
 import com.air.api.domain.repository.AirlineRepository
+import com.air.api.support.MessageKey
+import com.air.api.support.exception.EntityNotFoundException
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -16,11 +18,11 @@ class AirlineService(
     }
 
     fun getAirline(id: Long): Airline {
-        return airlineRepository.findByIdOrNull(id) ?: throw Exception()
+        return airlineRepository.findByIdOrNull(id) ?: throw EntityNotFoundException(MessageKey.NOT_FOUND_AIRLINE)
     }
 
     fun getByCode(code: String): Airline {
-        return airlineRepository.findByCode(code)
+        return airlineRepository.findByCode(code) ?: throw EntityNotFoundException(MessageKey.NOT_FOUND_AIRLINE)
     }
 
     @Transactional
