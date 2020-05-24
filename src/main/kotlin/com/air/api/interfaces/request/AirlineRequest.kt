@@ -1,11 +1,14 @@
 package com.air.api.interfaces.request
 
+import com.air.api.support.MessageKey
+import com.air.api.support.exception.MethodArgumentInvalidException
+
 data class AirlineCreateRequest(
     val code: String,
     val name: String
 ) {
     fun validate() {
-        if(code.length != 2) throw Exception("코드는 2자리!")
+        if(code.length != 2) throw MethodArgumentInvalidException(MessageKey.INVALID_PARAMETER)
     }
 }
 

@@ -4,8 +4,8 @@ import com.air.api.domain.Airport
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import com.air.api.domain.repository.AirportRepository
-import com.air.api.interfaces.request.AirportCreateRequest
-import com.air.api.interfaces.response.AirportView
+import com.air.api.support.MessageKey
+import com.air.api.support.exception.EntityNotFoundException
 import org.springframework.data.repository.findByIdOrNull
 
 @Service
@@ -14,7 +14,7 @@ class AirportService (
 ) {
 
     fun getAirport(id: Long): Airport {
-        return airportRepository.findByIdOrNull(id) ?: throw Exception()
+        return airportRepository.findByIdOrNull(id) ?: throw EntityNotFoundException(MessageKey.NOT_FOUND_AIRPORT)
     }
 
     @Transactional
@@ -34,7 +34,7 @@ class AirportService (
     }
 
     fun getByCode(code: String) : Airport {
-        return airportRepository.findByCode(code)
+        return airportRepository.findByCode(code) ?: throw EntityNotFoundException(MessageKey.NOT_FOUND_AIRPORT)
     }
 
     fun findAll() : List<Airport> {

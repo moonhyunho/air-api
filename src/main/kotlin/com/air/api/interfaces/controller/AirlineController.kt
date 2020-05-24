@@ -30,7 +30,7 @@ class AirlineController(
     }
 
     @PostMapping
-    fun create(request: AirlineCreateRequest): ResponseEntity<AirlineView> {
+    fun create(@RequestBody request: AirlineCreateRequest): ResponseEntity<AirlineView> {
         request.validate()
         return ResponseEntity(
             AirlineView.of(airlineService.create(Airline.of(request))),
@@ -51,7 +51,7 @@ class AirlineController(
     }
 
     @PutMapping
-    fun modify(request: AirlineModifyRequest): ResponseEntity<HttpStatus> {
+    fun modify(@RequestBody request: AirlineModifyRequest): ResponseEntity<HttpStatus> {
         airlineService.modify(request.id, request.code, request.name)
         return ResponseEntity.accepted().build()
     }
